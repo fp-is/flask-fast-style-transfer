@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="has-navbar-fixed-top">
+  <head>
+    <meta charset="utf-8">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='debug.css') }}"> -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <style>
+        /* Absolute Center Spinner */
+        .loading {
+        position: fixed;
+        z-index: 999;
+        height: 2em;
+        width: 2em;
+        overflow: visible;
+        margin: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        }
+
+        /* Transparent Overlay */
+        .loading:before {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3);
+        }
+
+        /* :not(:required) hides these rules from IE9 and below */
+        .loading:not(:required) {
+        /* hide "loading..." text */
+        font: 0/0 a;
+        color: transparent;
+        text-shadow: none;
+        background-color: transparent;
+        border: 0;
+        }
+
+        .loading:not(:required):after {
+        content: '';
+        display: block;
+        font-size: 10px;
+        width: 1em;
+        height: 1em;
+        margin-top: -0.5em;
+        -webkit-animation: spinner 1500ms infinite linear;
+        -moz-animation: spinner 1500ms infinite linear;
+        -ms-animation: spinner 1500ms infinite linear;
+        -o-animation: spinner 1500ms infinite linear;
+        animation: spinner 1500ms infinite linear;
+        border-radius: 0.5em;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+        box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+        }
+
+        /* Animation */
+
+        @-webkit-keyframes spinner {
+        0% {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+        }
+        @-moz-keyframes spinner {
+        0% {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+        }
+        @-o-keyframes spinner {
+        0% {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+        }
+        @keyframes spinner {
+        0% {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+        }
+    </style>
+    <title>style</title>
+  </head>
+  <body>
+    <div id="loadingDiv" class="loading">Loading&#8230;</div>
+    <nav class="navbar is-fixed-top">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="localhost:5000/index">
+          <img src="https://www.freeiconspng.com/uploads/artificial-intelligence-png-3.png">
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <a class="button" href="https://github.com/fp-is/flask-fast-style-transfer">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="section">
+      <form id="upload-file" method="POST" enctype="multipart/form-data">
+        <div class="columns is-centered">
+          <div class="column is-2 has-text-centered">
+            <div class="box radio" id="styles">
+              <label class="label">Choose your style</label>
+              <input type="radio" name="style" value="models/la-muse.ckpt" id="style1">
+              <figure class="image is-square">
+                  <img src="/static/style/la_muse.jpg">
+              </figure>
+              <input type="radio" name="style" value="models/rain-princess.ckpt" id="style2">
+              <figure class="image is-square">
+                  <img src="/static/style/rain_princess.jpg">
+              </figure>
+              <input type="radio" name="style" value="models/scream.ckpt" id="style3">
+              <figure class="image is-square">
+                  <img src="/static/style/the_scream.jpg">
+              </figure>
+              <input type="radio" name="style" value="models/udnie.ckpt" id="style4">
+              <figure class="image is-square">
+                  <img src="/static/style/udnie.jpg">
+              </figure>
+              <input type="radio" name="style" value="models/wave.ckpt" id="style5">
+              <figure class="image is-square">
+                  <img src="/static/style/wave.jpg">
+              </figure>
+              <input type="radio" name="style" value="models/wreck.ckpt" id="style6">
+              <figure class="image is-square">
+                  <img src="/static/style/the_shipwreck_of_the_minotaur.jpg">
+              </figure>
+            </div>
+          </div>
+
+          <div class="column is-10">
+            <div class="box">
+              <div class="field">
+                <div class="file is-info">
+                  <label class="file-label">
+                    <input class="file-input" type="file" name="image" id="file">
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">
+                        Choose File…
+                      </span>
+                    </span>
+                  </label>
+                  <a class="button is-info" id="upload-btn">
+                    <span class="file-icon">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                    </span>
+                    Upload
+                  </a>
+                </div>
+              </div>
+              <div class="columns is-centered">
+                <div class="column is-6 has-text-centered">
+                  <label class="label">Before</label>
+                  <div class="box">
+                    <figure class="image is-square">
+                      <img id="before">
+                    </figure>
+                  </div>
+                </div>
+                <div class="column is-6 has-text-centered">
+                  <label class="label">After</label>
+                  <div class="box">
+                    <figure class="image is-square">
+                      <img id="after">
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          &copy;2019 Enrico Hansvin Yahya
+        </p>
+      </div>
+    </footer>
+    <script>
+      $(function() {
+        var $loading = $('#loadingDiv').hide();
+        $(document)
+        .ajaxStart(function () {
+            $loading.show();
+        })
+        .ajaxStop(function () {
+            $loading.hide();
+        });
+        $('#upload-btn').click(function() {
+          var formData = new FormData();
+          if (document.getElementById("style1").checked) {
+            formData.append('style', document.getElementById("style1").value);
+          }
+          if (document.getElementById("style2").checked) {
+            formData.append('style', document.getElementById("style2").value);
+          }
+          if (document.getElementById("style3").checked) {
+            formData.append('style', document.getElementById("style3").value);
+          }
+          if (document.getElementById("style4").checked) {
+            formData.append('style', document.getElementById("style4").value);
+          }
+          if (document.getElementById("style5").checked) {
+            formData.append('style', document.getElementById("style5").value);
+          }
+          if (document.getElementById("style6").checked) {
+            formData.append('style', document.getElementById("style6").value);
+          }
+          formData.append('image', $('input[type=file]')[0].files[0]);
+          $.ajax({
+            type: 'POST',
+            url: '/api/convert',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+              var resp = JSON.parse(data);
+              document.getElementById("before").src=resp.before;
+              document.getElementById("after").src=resp.after;
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
